@@ -6,6 +6,8 @@ pipeline {
         CONTAINER_NAME = "evento-app"
     }
 
+    stages {
+
         stage('Build JAR') {
             steps {
                 sh './mvnw clean package -DskipTests'
@@ -29,5 +31,5 @@ pipeline {
                 sh "docker run -d -p 8080:8900 --name $CONTAINER_NAME $IMAGE_NAME"
             }
         }
-    
+    }
 }
