@@ -1,6 +1,10 @@
 pipeline {
-    agent any
-
+    agent {
+	docker {
+            image 'docker:24.0.2-dind'
+            args '-u root --privileged -v /var/run/docker.sock:/var/run/docker.sock'
+        }
+	}
     environment {
         IMAGE_NAME = "evento"
         CONTAINER_NAME = "evento-app"
