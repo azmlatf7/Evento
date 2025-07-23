@@ -6,13 +6,6 @@ pipeline {
         CONTAINER_NAME = "evento-app"
     }
 
-    stages {
-        stage('Clone') {
-            steps {
-                git 'https://github.com/azmlatf7/Evento.git'
-            }
-        }
-
         stage('Build JAR') {
             steps {
                 sh './mvnw clean package -DskipTests'
