@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'docker:24.0.2-dind'
-            args '-u root --privileged -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
 
     environment {
         IMAGE_NAME = "evento"
@@ -14,7 +9,9 @@ pipeline {
     stages {
         stage('Build JAR') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                sh ''' 
+				mvn clean package -DskipTests
+				'''
             }
         }
 
