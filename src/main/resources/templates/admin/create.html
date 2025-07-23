@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Event</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+  <style>
+    .create-event-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .create-event-buttons button {
+      padding: 0.5rem 1rem;
+      font-size: 0.95rem;
+      border-radius: 6px;
+      width: auto;
+      min-width: unset;
+      flex: 0 0 auto;
+    }
+
+    .remove-button {
+      background-color: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    .remove-button:hover {
+      background-color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Shared topbar -->
+  <div th:replace="fragments/navbar :: navbar"></div>
+
+  <div class="container">
+    <h2>Create Event</h2>
+
+    <form th:action="@{/admin/event}" method="post" onsubmit="return convertOptions()">
+      <label for="title">Event Title</label><br>
+      <input id="title" name="title" required/>
+
+      <div>
+        <label for="description">Event Description</label><br>
+        <input id="description" name="description" required/>
+      </div>
+
+      <div id="questions"></div>
+
+      <div class="create-event-buttons">
+        <button type="button" class="secondary-button" onclick="addQuestion()">+ Add Question</button>
+        <button type="submit" class="primary-button">Save Event</button>
+      </div>
+    </form>
+
+  </div>
+
+  <script>
+    let questionCount = 0;
+
+    function addQuestion() {
+      const container = document.getElementById('questions');
+      const div = document.createElement('div');
+      div.classList.add('question-container');
+      div.setAttribute('data-id', questionCount);
+
+      div.innerHTML = `
+        <hr/>
+        <label>Question</label><br>
+        <input name="questions[${questionCount}].question" required /><br>
+
+        <select name="questions[${questionCount}].type" onchange="toggleOptions(this, ${questionCount})">
+          <option value="TEXT">Text</option>
+          <option value="MCQ">Multiple Choice</option>
+        </select>
+
+        <div id="options-${questionCount}" style="display:none">
+          <label>Options (EX: A,B,C,D):</label>
+          <input name="questions[${questionCount}].optionsRaw" />
+        </div>
+
+        <input type="hidden" name="questions[${questionCount}].id" value="q${questionCount}" />
+        <button type="button" class="remove-button" onclick="removeQuestion(this)">Remove</button>
+      `;
+
+      container.appendChild(div);
+      questionCount++;
+    }
+
+    function toggleOptions(select, index) {
+      const optionsDiv = document.getElementById('options-' + index);
+      if (select.value === 'MCQ') {
+        optionsDiv.style.display = 'block';
+      } else {
+        optionsDiv.style.display = 'none';
+      }
+    }
+
+    function removeQuestion(button) {
+      const questionDiv = button.closest('.question-container');
+      if (questionDiv) {
+        questionDiv.remove();
+      }
+    }
+
+    function convertOptions() {
+      const inputs = document.querySelectorAll("[name^='questions'][name$='.optionsRaw']");
+      inputs.forEach(input => {
+        const index = input.name.match(/\d+/)[0];
+        const options = input.value.split(",").map(opt => opt.trim());
+        options.forEach((opt, i) => {
+          const hidden = document.createElement("input");
+          hidden.name = `questions[${index}].options[${i}]`;
+          hidden.value = opt;
+          hidden.type = "hidden";
+          input.parentNode.appendChild(hidden);
+        });
+      });
+      return true;
+    }
+  </script>
+
+</body>
+</html>

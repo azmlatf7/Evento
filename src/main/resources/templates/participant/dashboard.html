@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Available Events</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+  <!-- Topbar Fragment -->
+  <div th:replace="fragments/navbarpart :: navbarpart"></div>
+
+  <div class="container">
+    <h2>Available Events</h2>
+
+    <ul class="event-list">
+      <li th:each="event : ${events}" class="event-item">
+        <div>
+          <strong th:text="${event.title}">Event Title</strong><br/>
+          <span th:text="${event.description}">Event Description</span>
+        </div>
+        <a th:href="@{'/participant/event/' + ${event.id}}" class="primary-button">Join</a>
+      </li>
+    </ul>
+  </div>
+
+</body>
+</html>

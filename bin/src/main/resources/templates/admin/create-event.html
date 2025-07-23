@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Create Event</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <script>
+    let questionCount = 0;
+    function addQuestion() {
+        const container = document.getElementById('questions');
+        const div = document.createElement('div');
+        div.innerHTML = `
+            <hr/>
+            <label>Question:</label>
+            <input name="questions[${questionCount}].question" required/>
+            <select name="questions[${questionCount}].type" onchange="toggleOptions(this, ${questionCount})">
+                <option value="TEXT">Text</option>
+                <option value="MCQ">MCQ</option>
+            </select>
+            <div id="options-${questionCount}" style="display:none">
+                <label>Options (comma separated):</label>
+                <input name="questions[${questionCount}].optionsRaw" />
+            </div>
+            <input type="hidden" name="questions[${questionCount}].id" value="q${questionCount}" />
+        `;
+        container.appendChild(div);
+        questionCount++;
+    }
+
+    function toggleOptions(select, index) {
+        document.getElementById('options-' + index).style.display =
+            select.value === 'MCQ' ? 'block' : 'none';
+    }
+  </script>
+</head>
+<body>
+  <div class="page-container">
+    <h2>Create Event</h2>
+    <form th:action="@{/admin/event}" method="post" onsubmit="return convertOptions()">
+      Title: <input name="title" required/><br/>
+      Description: <input name="description" required/><br/>
+      <div id="questions"></div>
+      <button type="button" onclick="addQuestion()">+ Add Question</button><br/><br/>
+      <button type="submit">Save</button>
+    </form>
+    <a th:href="@{/admin/dashboard}">Back</a>
+  </div>
+
+<script>
+  function convertOptions() {
+      // Convert comma-separated options to array-like names
+      const inputs = document.querySelectorAll("[name^='questions'][name$='.optionsRaw']");
+      inputs.forEach(input => {
+          const index = input.name.match(/\d+/)[0];
+          const options = input.value.split(",").map(opt => opt.trim());
+          options.forEach((opt, i) => {
+              const hidden = document.createElement("input");
+              hidden.name = `questions[${index}].options[${i}]`;
+              hidden.value = opt;
+              hidden.type = "hidden";
+              input.parentNode.appendChild(hidden);
+          });
+      });
+      return true;
+  }
+</script>
+</body>
+</html>

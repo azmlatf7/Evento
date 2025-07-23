@@ -1,0 +1,225 @@
+/* Root Variables */
+:root {
+    --topbar-bg: #1f2937;
+    --topbar-text: #ffffff;
+    --topbar-hover: #374151;
+}
+
+/* Base Reset & Layout */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+    color: #111827;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 700px;
+    max-height:10000px;
+    margin: 80px auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.03), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+.container h1,
+.container h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1.25rem;
+}
+
+/* Form Elements */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 95%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background-color: #f9fafb;
+    font-size: 1rem;
+    transition: border 0.2s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: #3b82f6;
+    outline: none;
+}
+
+/* Buttons - Shared Styles */
+button,
+.primary-button,
+.secondary-button {
+    padding: 0.4rem 0.9rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: auto;         /* prevents stretching */
+    min-width: unset;    /* override defaults */
+}
+
+
+/* Buttons - Primary */
+.primary-button {
+    background-color: #10b981;
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+    
+}
+
+.primary-button:hover {
+    background-color: #059669;
+}
+
+/* Buttons - Secondary */
+.secondary-button {
+    background-color: #3b82f6;
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.secondary-button:hover {
+    background-color: #2563eb;
+}
+
+/* Utility */
+.block-button {
+    display: block;
+    align-items: center;
+    width: 95%;
+    margin-top: 1rem;
+    text-decoration: none;
+}
+
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mb-4 { margin-bottom: 1rem; }
+
+.hidden { display: none; }
+
+hr {
+    margin: 1.5rem 0;
+    border: none;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* Topbar */
+.topbar {
+    background-color: var(--topbar-bg);
+    color: var(--topbar-text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.topbar a {
+    color: var(--topbar-text);
+    margin-left: 1.5rem;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.topbar a:hover {
+    color: #d1d5db;
+}
+
+/* Error */
+.error-message {
+    color: #dc2626;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+/* Event List Items */
+.event-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.event-item {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: background 0.2s ease;
+}
+
+.event-item:hover {
+    background-color: #f3f4f6;
+}
+
+/* Question Block */
+.question-container {
+    margin-bottom: 2rem;
+}
+
+.event-item ul {
+    margin-left: 1.25rem;
+    padding-left: 0;
+}
+
+.event-item li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;  /* centers horizontally */
+    gap: 1rem;                /* space between buttons */
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+
+.button-group button {
+    min-width: 50px;  
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(-45deg, #f0f4f8, #c3dafe, #a7f3d0, #fef3c7);
+    background-size: 400% 400%;
+    animation: gradientBG 7s ease infinite;
+    color: #111827;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>My Events</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+  <!-- Topbar -->
+  <div th:replace="fragments/navbarpart :: navbarpart"></div>
+
+  <div class="container">
+    <h2>My Joined Events</h2>
+
+    <div th:each="res : ${responses}" class="event-item">
+      <div>
+        <strong class="event-title" th:text="${eventsMap[res.eventId]}">Event Title</strong>
+        <ul class="mt-2">
+          <li th:each="ans : ${res.answers}">
+            <span th:text="${ans.answer}">Answer</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

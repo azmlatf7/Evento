@@ -1,0 +1,11 @@
+<!-- templates/fragments/navbar.html -->
+<div th:fragment="navbarpart">
+  <nav class="topbar">
+    <span>Evento</span>
+    <div>
+      <a th:href="@{/participant/dashboard}">Dashboard</a>      
+      <a th:href="@{/participant/events}">My Events</a>      
+      <a th:href="@{/logout}">Logout</a>
+    </div>
+  </nav>
+</div>

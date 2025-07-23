@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Shared topbar -->
+  <div th:replace="fragments/navbar :: navbar"></div>
+
+  <div class="container">
+    <h2>Welcome, Admin!</h2>
+
+    <div class="mt-4">
+      <a th:href="@{/admin/event/new}" class="primary-button block-button">+ Create New Event</a>
+    </div>
+
+	<h3 class="mt-4">Your Events</h3>
+	
+	<ul class="event-list" th:if="${events != null and !events.empty}">
+	  <li th:each="event : ${events}" class="event-item">
+	    <strong th:text="${event.title}">Event Title</strong>
+	    <br/>
+	    <span th:text="${event.description}">Event Description</span>
+	  </li>
+	</ul>
+	
+	<p th:unless="${events != null and !events.empty}">None</p>
+
+
+</body>
+</html>

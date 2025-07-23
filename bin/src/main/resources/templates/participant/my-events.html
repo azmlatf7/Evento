@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>My Events</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+  <div class="page-container">
+  <h2>My Joined Events</h2>
+  <ul th:each="res : ${responses}">
+    <b th:text="${eventsMap[res.eventId]}">Event Title</b><br/>
+    <li>
+      <ul>
+        <li th:each="ans : ${res.answers}">
+          <span th:text="'Q: ' + ${ans.questionId} + ' - A: ' + ${ans.answer}"></span>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <a th:href="@{/participant/dashboard}">Back to Dashboard</a> |
+  <a th:href="@{/logout}">Logout</a>
+  </div>
+</body>
+</html>

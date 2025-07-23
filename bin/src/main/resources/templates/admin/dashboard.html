@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="page-container">
+  <h2>Welcome Admin!</h2>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <a th:href="@{/admin/event/new}">+ Create New Event</a>
+  <h3>Your Events</h3>
+  <ul>
+    <li th:each="event : ${events}">
+      <strong th:text="${event.title}">Title</strong> -
+      <span th:text="${event.description}">Description</span>
+    </li>
+  </ul>
+
+  <a th:href="@{/logout}">Logout</a>
+</div>
+</body>
+</html>
