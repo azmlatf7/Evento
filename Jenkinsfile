@@ -9,9 +9,10 @@ pipeline {
     stages {
         stage('Build JAR') {
             steps {
-                sh ''' 
-				mvn clean package -DskipTests
-				'''
+                sh '''
+                apk add --no-cache openjdk17 maven
+                mvn clean package -DskipTests
+                '''
             }
         }
 
