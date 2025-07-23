@@ -29,5 +29,5 @@ pipeline {
                 sh "docker run -d -p 8080:8900 --name $CONTAINER_NAME $IMAGE_NAME"
             }
         }
-    }
+    
 }
