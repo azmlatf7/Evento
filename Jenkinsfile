@@ -11,6 +11,7 @@ pipeline {
         stage('Build JAR') {
             steps {
                 sh '''
+				apk add --no-cache openjdk17 maven
 				mvn clean package -DskipTests
 				'''
             }
